@@ -1,21 +1,14 @@
-import { useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
+import React from 'react'
+import Player from './components/Player'
 
-function App() {
-  const [msg, setMsg] = useState("Nothing yet");
-
-  async function handleClick() {
-    const res = await invoke("get_user");
-    setMsg(res);
-  }
+export default function App() {
+  const localPath = "C:\\Users\\nitiksh\\Videos\\1005.mp4"
+  const encodedPath = encodeURIComponent(localPath)
+  const videoUrl = `http://127.0.0.1:7878/?file=${encodedPath}`
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Tauri + React + Vite</h1>
-      <button onClick={handleClick}>Call Rust</button>
-      <p>{msg}</p>
+    <div>
+      <Player path={videoUrl} />
     </div>
-  );
+  )
 }
-
-export default App;
